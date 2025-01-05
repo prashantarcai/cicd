@@ -3,7 +3,7 @@ name: CI/CD Pipeline for GCP VM
 on:
   push:
     branches:
-      - main  # Replace with the branch you want to trigger deployment
+      - main
 
 jobs:
   deploy:
@@ -20,7 +20,7 @@ jobs:
         run: |
           echo "$GCP_SSH_KEY" > ssh_key.pem
           chmod 600 ssh_key.pem
-          ssh -o StrictHostKeyChecking=no -i ssh_key.pem ubuntu@$GCP_VM_IP << 'EOF'
+          ssh -v -o StrictHostKeyChecking=no -i ssh_key.pem ubuntu@$GCP_VM_IP << 'EOF'
             cd ~/test-node-app
             git pull origin main
             npm install
