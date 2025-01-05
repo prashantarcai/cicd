@@ -15,7 +15,7 @@ jobs:
 
       - name: Deploy to GCP VM
         env:
-          GCP_VM_IP: your-vm-ip  # Replace with your actual VM IP
+          GCP_VM_IP: 34.58.167.132  # Replace with your actual VM IP
           GCP_SSH_KEY: ${{ secrets.GCP_SSH_KEY }}
         run: |
           echo "$GCP_SSH_KEY" > ssh_key.pem
