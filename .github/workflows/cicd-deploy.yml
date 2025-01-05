@@ -13,14 +13,15 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
       - name: Deploy to GCP VM
         env:
           GCP_VM_IP: 34.58.167.132  # Replace with your actual VM IP
-          GCP_SSH_KEY: ${{ secrets.GCP_SSH_KEY }}
+          GCP_VM_PASSWORD: ${{ secrets.GCP_VM_PASSWORD }}
         run: |
-          echo "$GCP_SSH_KEY" > ssh_key.pem
-          chmod 600 ssh_key.pem
-          ssh -v -o StrictHostKeyChecking=no -i ssh_key.pem ubuntu@$GCP_VM_IP << 'EOF'
+          sshpass -p "$GCP_VM_PASSWORD" ssh -o StrictHostKeyChecking=no ubuntu@$GCP_VM_IP << 'EOF'
             cd ~/test-node-app
             git pull origin main
             npm install
