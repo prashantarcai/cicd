@@ -4,7 +4,7 @@ const port = process.env.PORT || 8080; // Use the port provided by Cloud Run or 
 
 // Define a basic route
 app.get('/', (req, res) => {
-  res.send('Hello from Cloud Run Thankx!');
+  res.send('Hello from Cloud Run!');
 });
 
 // Start the Express server
